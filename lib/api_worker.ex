@@ -14,19 +14,24 @@ defmodule ApiWorker do
 
   def fetch_codes do
     codes = Repo.all(from Country)
-      |> Enum.map(fn (x) -> {x.fifa_code, x.id} end)
+      |> Enum.map(fn (x) -> [x.fifa_code, x.id]end)
+      Enum.each(codes, fn (x) -> IO.puts(List.first(x)) end)
+      |>IO.inspect(label: "what do we have here.")
   end
 
   def fetch_matches() do
     codes = Repo.all(from Country)
-      |> Enum.map(fn (x) -> {x.fifa_code, x.id} end)
+      |> Enum.map(fn (x) -> [x.fifa_code, x.id] end)
+      |> Enum.fetch!(0)
+      |> List.wrap
 
     Enum.each(codes, fn code ->
-      %HTTPoison.Response{body: body} = HTTPoison.get! match_by_code_url()+code
+      %HTTPoison.Response{body: body} = HTTPoison.get! match_by_code_url() <> "KOR"
       body
-      |> Poison.decode!
-      |> List.flatten
-      |> IO.inspect()
+      |> IO.inspect(label: "Mathces")
+      #|> Poison.decode!
+      #|> List.flatten
+      #|> IO.inspect(label: "Mathces")
     end)
   end
 
@@ -44,8 +49,6 @@ defmodule ApiWorker do
         end
     end)
   end
-
-
 
   def fetch_team() do
     dictionary = Repo.all(from GroupName)
