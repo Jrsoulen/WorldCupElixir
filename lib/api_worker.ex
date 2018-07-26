@@ -4,7 +4,33 @@ defmodule ApiWorker do
   alias Worldcup.Player, as: Player
   alias Worldcup.Repo, as: Repo
   alias Worldcup.Match, as: Match
+  alias Worldcup.Stage, as: Stage
   import Ecto.Query
+
+  def match_stage do
+    stage_dictionary = Repo.all(from Stage)
+      |> Enum.map(fn (x) -> {String.to_atom(x.stage_name), x.id} end)
+    country_dictionary = Repo.all(from Country)
+      |> Enum.map(fn (x) -> {String.to_atom(x.country), x.id} end)
+
+    %HTTPoison.Response{body: body} = HTTPoison.get! "https://worldcup.sfg.io/matches"
+    body
+    |> Poison.decode!
+    |> Enum.each(fn (match) ->
+      stage = match
+        |> Map.fetch!("stage_name")
+      home = match
+        |> Map.fetch!("home_team_country")
+      home = country_dictionary[String.to_atom(home)]
+      away = match
+        |> Map.fetch!("away_team_country")
+      away = country_dictionary[String.to_atom(away)]
+      match = from(m in Match, where: m.home_id == ^home and m.away_id == ^away)
+        |> Repo.one
+      match = Ecto.Changeset.change match, stage_id: stage_dictionary[String.to_atom(stage)]
+      Repo.update! match
+    end)
+  end
 
   def fetch_matches do
     country_dictionary = Repo.all(from Country)
@@ -125,6 +151,21 @@ defmodule ApiWorker do
           |> GroupName.changeset(x)
           |> Repo.insert
         end
+    end)
+  end
+
+  def fetch_stages do
+    %HTTPoison.Response{body: body} = HTTPoison.get! "https://worldcup.sfg.io/matches"
+    body
+    |> Poison.decode!
+    |> List.flatten
+    |> Enum.map(fn (x) ->
+        existing = Repo.get_by(Stage, stage_name: x["stage_name"])
+        if (is_nil(existing)) do
+          %Stage{}
+          |> Stage.changeset(x)
+          |> Repo.insert
+       end
     end)
   end
 

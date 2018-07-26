@@ -1,6 +1,7 @@
 defmodule Worldcup.Stage do
   use Ecto.Schema
   import Ecto.Changeset
+  use Worldcup.Web, :model
 
 
   schema "stages" do
@@ -10,9 +11,9 @@ defmodule Worldcup.Stage do
   end
 
   @doc false
-  def changeset(stage, attrs) do
+  def changeset(stage, params \\ %{}) do
     stage
-    |> cast(attrs, [:stage_name])
+    |> cast(params, [:stage_name])
     |> validate_required([:stage_name])
   end
 end
