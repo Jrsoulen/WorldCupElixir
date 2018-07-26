@@ -4,17 +4,18 @@ defmodule Worldcup.Goal do
 
 
   schema "goals" do
-    field :goal, :string
-    field :match_id, :id
-    field :player_id, :id
+    field :minute, :string
+    belongs_to :match, Worldcup.Match
+    belongs_to :player, Worldcup.Player
+    belongs_to :country, Worldcup.Country
 
     timestamps()
   end
 
   @doc false
-  def changeset(goal, attrs) do
-    goal
-    |> cast(attrs, [:goal])
-    |> validate_required([:goal])
+  def changeset(struct, params \\ %{}) do
+    struct
+    |> cast(params, [:minute, :match_id, :player_id, :country_id])
+    |> validate_required([:minute, :match_id, :player_id, :country_id])
   end
 end
