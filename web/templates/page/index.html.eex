@@ -1,36 +1,123 @@
-<div class="jumbotron">
-  <h2><%= gettext "Welcome to %{name}", name: "Phoenix!" %></h2>
-  <p class="lead">A productive web framework that<br />does not compromise speed and maintainability.</p>
-</div>
-
-<div class="row marketing">
-  <div class="col-lg-6">
-    <h4>Resources</h4>
-    <ul>
-      <li>
-        <a href="http://phoenixframework.org/docs/overview">Guides</a>
-      </li>
-      <li>
-        <a href="https://hexdocs.pm/phoenix">Docs</a>
-      </li>
-      <li>
-        <a href="https://github.com/phoenixframework/phoenix">Source</a>
-      </li>
-    </ul>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4 container-fluid">
+      <div class="row matchbox">
+        <div class="match container-fluid">
+          <div class="row">
+            <div class="col-md-12"><h1 class="text-center">World Cup Russia <br> 2018</h1></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4"></div>
   </div>
 
-  <div class="col-lg-6">
-    <h4>Help</h4>
-    <ul>
-      <li>
-        <a href="http://groups.google.com/group/phoenix-talk">Mailing list</a>
-      </li>
-      <li>
-        <a href="http://webchat.freenode.net/?channels=elixir-lang">#elixir-lang on freenode IRC</a>
-      </li>
-      <li>
-        <a href="https://twitter.com/elixirphoenix">@elixirphoenix</a>
-      </li>
-    </ul>
+  <div class="row">
+    <div class="col-md-3 container-fluid">
+      <div class="row matchbox">
+        <div class="match container-fluid">
+          <div class="row">
+            <div class="col-md-12"><h3 class="text-center">Group A</h3></div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 text-left">Home</div>
+            <div class="col-md-6 text-right">Away</div>
+          </div>
+          <%= for a_match <- @a_matches do %>
+          <div class="row">
+            <div class="col-md-5 text-left"><%= ~s{#{Enum.at(a_match, 2)} }%></div>
+            <div class="col-md-2 text-center score"><%= ~s{#{Enum.at(a_match, 3)} - #{Enum.at(a_match, 4)}}%></div>
+            <div class="col-md-5 text-right"><%= ~s{#{Enum.at(a_match, 5)} }%></div>
+          </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3 container-fluid">
+      <div class="row matchbox">
+        <div class="match container-fluid">
+          <div class="row">
+            <div class="col-md-12"><h3 class="text-center">Group B</h3></div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 text-left">Home</div>
+            <div class="col-md-6 text-right">Away</div>
+          </div>
+          <%= for b_match <- @b_matches do %>
+          <div class="row">
+            <div class="col-md-5 text-left"><%= ~s{#{Enum.at(b_match, 2)} }%></div>
+            <div class="col-md-2 text-center score"><%= ~s{#{Enum.at(b_match, 3)} - #{Enum.at(b_match, 4)}}%></div>
+            <div class="col-md-5 text-right"><%= ~s{#{Enum.at(b_match, 5)} }%></div>
+          </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3 container-fluid">
+      <div class="row matchbox">
+        <div class="match container-fluid">
+          <div class="row">
+            <div class="col-md-12"><h3 class="text-center">Group C</h3></div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 text-left">Home</div>
+            <div class="col-md-6 text-right">Away</div>
+          </div>
+          <%= for c_match <- @c_matches do %>
+          <div class="row">
+            <div class="col-md-5 text-left"><%= ~s{#{Enum.at(c_match, 2)} }%></div>
+            <div class="col-md-2 text-center score"><%= ~s{#{Enum.at(c_match, 3)} - #{Enum.at(c_match, 4)}}%></div>
+            <div class="col-md-5 text-right"><%= ~s{#{Enum.at(c_match, 5)} }%></div>
+          </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3 container-fluid">
+      <div class="row matchbox">
+        <div class="match container-fluid">
+          <div class="row">
+            <div class="col-md-12"><h3 class="text-center">Group D</h3></div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 text-left">Home</div>
+            <div class="col-md-6 text-right">Away</div>
+          </div>
+          <%= for d_match <- @d_matches do %>
+          <div class="row">
+            <div class="col-md-5 text-left"><%= ~s{#{Enum.at(d_match, 2)} }%></div>
+            <div class="col-md-2 text-center score"><%= ~s{#{Enum.at(d_match, 3)} - #{Enum.at(d_match, 4)}}%></div>
+            <div class="col-md-5 text-right"><%= ~s{#{Enum.at(d_match, 5)} }%></div>
+          </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4 container-fluid">
+      <div class="row matchbox">
+        <div class="match container-fluid">
+          <div class="row">
+            <div class="col-md-12"><h3 class="text-center">World Cup Final</h3></div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 text-left">Home</div>
+            <div class="col-md-6 text-right">Away</div>
+          </div>
+          <%= for final <- @final do %>
+          <div class="row">
+            <div class="col-md-5 text-left"><%= ~s{#{Enum.at(final, 2)} }%></div>
+            <div class="col-md-2 text-center score"><%= ~s{#{Enum.at(final, 3)} - #{Enum.at(final, 4)}}%></div>
+            <div class="col-md-5 text-right"><%= ~s{#{Enum.at(final, 5)} }%></div>
+          </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4"></div>
   </div>
 </div>

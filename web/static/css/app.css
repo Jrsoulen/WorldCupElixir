@@ -1,1 +1,14 @@
-/* This file is for your main application css. */
+.matchbox {
+    background-image: url("../images/match-background.jpg");
+    color: white;
+    font-weight: bold;
+    border-radius: 5px;
+    margin: 10px;
+}
+.match {
+  padding: 5px;
+}
+
+.score {
+  padding: 0px;
+}
