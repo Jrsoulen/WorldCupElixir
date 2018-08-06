@@ -143,7 +143,6 @@ defmodule ApiWorker do
     codes = Repo.all(from Country)
       |> Enum.map(fn (x) -> [x.fifa_code, x.id]end)
       Enum.each(codes, fn (x) -> IO.puts(List.first(x)) end)
-      |>IO.inspect(label: "what do we have here.")
   end
 
   def fetch_players(match, country_id, country_code) do

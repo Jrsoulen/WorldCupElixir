@@ -13,84 +13,70 @@
     <div class="col-md-4"></div>
   </div>
 
-  <div class="row">
-    <div class="col-md-3 container-fluid">
-      <div class="row matchbox">
-        <div class="match container-fluid">
-          <div class="row">
-            <div class="col-md-12"><h3 class="text-center">Group A</h3></div>
-          </div>
-          <div class="row">
-            <div class="col-md-6 text-left">Home</div>
-            <div class="col-md-6 text-right">Away</div>
-          </div>
-          <%= for a_match <- @a_matches do %>
-          <div class="row">
-            <div class="col-md-5 text-left"><%= ~s{#{Enum.at(a_match, 2)} }%></div>
-            <div class="col-md-2 text-center score"><%= ~s{#{Enum.at(a_match, 3)} - #{Enum.at(a_match, 4)}}%></div>
-            <div class="col-md-5 text-right"><%= ~s{#{Enum.at(a_match, 5)} }%></div>
-          </div>
+  <div class="accordion" id="accordionExample">
+    <div class="card">
+      <div class="card-header" id="headingOne">
+        <h5 class="mb-0">
+          <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+            Group Stage Matches
+          </button>
+        </h5>
+      </div>
+
+      <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+        <div class="card-body row">
+          <%= for groups <- @groups do %>
+            <div class="col-3 container-fluid">
+              <div class="matchbox">
+                <div class="match container-fluid">
+                  <div class="row">
+                    <div class="col-md-12"><h3 class="text-center">Group <%= ~s{ #{Enum.at(groups, 1)} } %></h3></div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6 text-left">Home</div>
+                    <div class="col-md-6 text-right">Away</div>
+                  </div>
+                  <%= for matches <- @matches do %>
+                    <%= if Enum.at(matches, 7) === Enum.at(groups, 0) do %>
+                      <div class="row no-gutters">
+                        <div class="col-5 text-left text-truncate"><%= ~s{#{Enum.at(matches, 2)} }%></div>
+                        <div class="col-2"><%= ~s{#{Enum.at(matches, 3)} - #{Enum.at(matches, 4)}}%></div>
+                        <div class="text-truncate col-5 text-right "><%= ~s{#{Enum.at(matches, 5)} }%></div>
+                      </div>
+                    <% end %>
+                  <% end %>
+                </div>
+              </div>
+            </div>
           <% end %>
         </div>
       </div>
     </div>
-    <div class="col-md-3 container-fluid">
-      <div class="row matchbox">
-        <div class="match container-fluid">
-          <div class="row">
-            <div class="col-md-12"><h3 class="text-center">Group B</h3></div>
-          </div>
-          <div class="row">
-            <div class="col-md-6 text-left">Home</div>
-            <div class="col-md-6 text-right">Away</div>
-          </div>
-          <%= for b_match <- @b_matches do %>
-          <div class="row">
-            <div class="col-md-5 text-left"><%= ~s{#{Enum.at(b_match, 2)} }%></div>
-            <div class="col-md-2 text-center score"><%= ~s{#{Enum.at(b_match, 3)} - #{Enum.at(b_match, 4)}}%></div>
-            <div class="col-md-5 text-right"><%= ~s{#{Enum.at(b_match, 5)} }%></div>
-          </div>
-          <% end %>
+    <div class="card">
+      <div class="card-header" id="headingTwo">
+        <h5 class="mb-0">
+          <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+            Collapsible Group Item #2
+          </button>
+        </h5>
+      </div>
+      <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+        <div class="card-body">
+          Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
         </div>
       </div>
     </div>
-    <div class="col-md-3 container-fluid">
-      <div class="row matchbox">
-        <div class="match container-fluid">
-          <div class="row">
-            <div class="col-md-12"><h3 class="text-center">Group C</h3></div>
-          </div>
-          <div class="row">
-            <div class="col-md-6 text-left">Home</div>
-            <div class="col-md-6 text-right">Away</div>
-          </div>
-          <%= for c_match <- @c_matches do %>
-          <div class="row">
-            <div class="col-md-5 text-left"><%= ~s{#{Enum.at(c_match, 2)} }%></div>
-            <div class="col-md-2 text-center score"><%= ~s{#{Enum.at(c_match, 3)} - #{Enum.at(c_match, 4)}}%></div>
-            <div class="col-md-5 text-right"><%= ~s{#{Enum.at(c_match, 5)} }%></div>
-          </div>
-          <% end %>
-        </div>
+    <div class="card">
+      <div class="card-header" id="headingThree">
+        <h5 class="mb-0">
+          <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+            Collapsible Group Item #3
+          </button>
+        </h5>
       </div>
-    </div>
-    <div class="col-md-3 container-fluid">
-      <div class="row matchbox">
-        <div class="match container-fluid">
-          <div class="row">
-            <div class="col-md-12"><h3 class="text-center">Group D</h3></div>
-          </div>
-          <div class="row">
-            <div class="col-md-6 text-left">Home</div>
-            <div class="col-md-6 text-right">Away</div>
-          </div>
-          <%= for d_match <- @d_matches do %>
-          <div class="row">
-            <div class="col-md-5 text-left"><%= ~s{#{Enum.at(d_match, 2)} }%></div>
-            <div class="col-md-2 text-center score"><%= ~s{#{Enum.at(d_match, 3)} - #{Enum.at(d_match, 4)}}%></div>
-            <div class="col-md-5 text-right"><%= ~s{#{Enum.at(d_match, 5)} }%></div>
-          </div>
-          <% end %>
+      <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+        <div class="card-body">
+          Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
         </div>
       </div>
     </div>
